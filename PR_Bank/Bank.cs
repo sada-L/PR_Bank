@@ -15,12 +15,13 @@ public class Bank
         _accName = accName;
         _accSum = accSum;
     }
-
+    
+    //вывод информации о счете
     public void Out()
     {
         Console.WriteLine($"Номер счета: {_accNumber}, Имя: {_accName}, Сумма на счете: {_accSum}");
     }
-
+    //пополнение счета
     public void Dob()
     {
         Console.Write("Ввидите сумму пополнения: ");
@@ -36,7 +37,7 @@ public class Bank
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
-
+    //снять со счета
     public void Umen()
     {
         Console.Write("Ввидите суммы вывода: ");
@@ -60,7 +61,7 @@ public class Bank
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
-
+    //снятие всей суммы со счета
     public void Obmul()
     {
         Console.WriteLine("Вы точно хотите снять всю сумму: ДА/НЕТ");
@@ -80,7 +81,7 @@ public class Bank
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
-
+    //поиск счета по номеру
     private Bank Search(int nom, List<Bank> banks) 
     {
         foreach (Bank bank in banks)
@@ -92,7 +93,7 @@ public class Bank
         }
         return null;
     }
-
+    //перевод между счетами
     public void Transfer()
     {
         Console.Write("Ввидите номер счета получателя: ");
@@ -125,7 +126,7 @@ public class Bank
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
-
+    //Интерфейс пользователя
     public void Menu()
     {
         while (true)
