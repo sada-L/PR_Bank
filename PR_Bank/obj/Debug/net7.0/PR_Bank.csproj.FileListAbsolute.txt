@@ -1,0 +1,14 @@
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\bin\Debug\net7.0\PR_Bank.exe
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\bin\Debug\net7.0\PR_Bank.deps.json
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\bin\Debug\net7.0\PR_Bank.runtimeconfig.json
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\bin\Debug\net7.0\PR_Bank.dll
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\bin\Debug\net7.0\PR_Bank.pdb
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\PR_Bank.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\PR_Bank.AssemblyInfoInputs.cache
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\PR_Bank.AssemblyInfo.cs
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\PR_Bank.csproj.CoreCompileInputs.cache
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\PR_Bank.dll
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\refint\PR_Bank.dll
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\PR_Bank.pdb
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\PR_Bank.genruntimeconfig.cache
+C:\Users\sada\RiderProjects\PR_Bank\PR_Bank\obj\Debug\net7.0\ref\PR_Bank.dll
