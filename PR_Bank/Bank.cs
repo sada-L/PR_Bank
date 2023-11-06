@@ -1,21 +1,15 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace PR_Bank;
-
+﻿namespace PR_Bank;
 public class Bank
 {
     private int _accNumber;
     private string _accName;
     private float _accSum;
-    public List<Bank> Banks;
-
     public Bank(int accNumber, string accName, float accSum)
     {
         _accNumber = accNumber; 
         _accName = accName;
         _accSum = accSum;
     }
-    
     //вывод информации о счете
     public void Out()
     {
@@ -32,7 +26,7 @@ public class Bank
         }
         else
         {
-            Console.WriteLine("Не верный формат ввода, попробуйте еще раз");
+            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
             Dob();
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
@@ -56,7 +50,7 @@ public class Bank
         }
         else
         {
-            Console.WriteLine("Не верный формат ввода, попробуйте еще раз");
+            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
             Umen();
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
@@ -64,7 +58,8 @@ public class Bank
     //снятие всей суммы со счета
     public void Obmul()
     {
-        Console.WriteLine("Вы точно хотите снять всю сумму: ДА/НЕТ");
+        Console.Write("Вы точно хотите снять всю сумму: ДА/НЕТ" +
+                          ">");
         string ans = Console.ReadLine();
         if (ans == "ДА")
         {
@@ -76,7 +71,7 @@ public class Bank
         }
         else
         {
-            Console.WriteLine("Не верный формат ввода, попробуйте еще раз");
+            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
             Obmul();
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
@@ -94,7 +89,7 @@ public class Bank
         return null;
     }
     //перевод между счетами
-    public void Transfer()
+    public void Transfer(List<Bank> Banks)
     {
         Console.Write("Ввидите номер счета получателя: ");
         int nom = Convert.ToInt32(Console.ReadLine());
@@ -102,7 +97,7 @@ public class Bank
         if (srhBank == null)
         {
             Console.WriteLine("Получатель не найден, попробуйте еще раз");
-            Transfer();
+            Transfer(Banks);
         }
         Console.Write("Ввидите сумму перевода: ");
         float sum = Convert.ToInt32(Console.ReadLine());
@@ -116,35 +111,37 @@ public class Bank
             else
             {
                 Console.WriteLine("Недостаточно суммы на счете, попробуйте еще раз");
-                Transfer();
+                Transfer(Banks);
             }
         }
         else
         {
-            Console.WriteLine("Не верный формат ввода, попробуйте еще раз");
-            Transfer();
+            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
+            Transfer(Banks);
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //Интерфейс пользователя
-    public void Menu()
+    public void Menu(List<Bank> Banks)
     {
         while (true)
         {
-            Console.WriteLine("Выберете необходимое действие:\n" +
-                              "1. Показать данные счета\n" +
-                              "2. Пополнить счет\n" +
-                              "3. Снять со счета\n" +
-                              "4. Снять всю сумму со счета\n" +
-                              "5. Перевести на другой счет\n" +
-                              "6. Выход");
+            Console.WriteLine
+            ("Выберете необходимое действие:\n" +
+             "1. Показать данные счета\n" +
+             "2. Пополнить счет\n" +
+             "3. Снять со счета\n" +
+             "4. Снять всю сумму со счета\n" +
+             "5. Перевести на другой счет\n" +
+             "6. Выход\n" +
+             ">");
             switch (Convert.ToInt32(Console.ReadLine()))
             {
                 case 1: Out(); break;
                 case 2: Dob(); break;
                 case 3: Umen(); break;
                 case 4: Obmul(); break;
-                case 5: Transfer(); break;
+                case 5: Transfer(Banks); break;
                 case 6: return;
             }
         }
