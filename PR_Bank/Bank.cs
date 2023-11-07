@@ -4,11 +4,14 @@ public class Bank
     private int _accNumber;
     private string _accName;
     private float _accSum;
-    public Bank(int accNumber, string accName, float accSum)
+    //Ввод информации
+    void Info()
     {
-        _accNumber = accNumber; 
-        _accName = accName;
-        _accSum = accSum;
+        Console.WriteLine($"Введите ноиер счета и ФИО: \n" +
+                          $">");
+        string[] s = Console.ReadLine().Split(',', ' ', ';');
+        _accNumber = Int32.Parse(s[0]);
+        _accName = s[1];
     }
     //вывод информации о счете
     public void Out()
@@ -16,7 +19,7 @@ public class Bank
         Console.WriteLine($"Номер счета: {_accNumber}, Имя: {_accName}, Сумма на счете: {_accSum}");
     }
     //пополнение счета
-    public void Dob()
+    void Dob()
     {
         Console.Write("Ввидите сумму пополнения: ");
         float sum = Convert.ToInt32(Console.ReadLine());
@@ -32,7 +35,7 @@ public class Bank
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //снять со счета
-    public void Umen()
+    void Umen()
     {
         Console.Write("Ввидите суммы вывода: ");
         float sum = Convert.ToInt32(Console.ReadLine());
@@ -56,7 +59,7 @@ public class Bank
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //снятие всей суммы со счета
-    public void Obmul()
+    void Obmul()
     {
         Console.Write("Вы точно хотите снять всю сумму: ДА/НЕТ" +
                           ">");
@@ -77,7 +80,7 @@ public class Bank
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //поиск счета по номеру
-    private Bank Search(int nom, List<Bank> banks) 
+    Bank Search(int nom, List<Bank> banks) 
     {
         foreach (Bank bank in banks)
         {
@@ -89,7 +92,7 @@ public class Bank
         return null;
     }
     //перевод между счетами
-    public void Transfer(List<Bank> Banks)
+    void Transfer(List<Bank> Banks)
     {
         Console.Write("Ввидите номер счета получателя: ");
         int nom = Convert.ToInt32(Console.ReadLine());
@@ -128,6 +131,7 @@ public class Bank
         {
             Console.WriteLine
             ("Выберете необходимое действие:\n" +
+             "0. Ввести данные\n" +
              "1. Показать данные счета\n" +
              "2. Пополнить счет\n" +
              "3. Снять со счета\n" +
@@ -137,6 +141,7 @@ public class Bank
              ">");
             switch (Convert.ToInt32(Console.ReadLine()))
             {
+                case 0: Info(); break;
                 case 1: Out(); break;
                 case 2: Dob(); break;
                 case 3: Umen(); break;
