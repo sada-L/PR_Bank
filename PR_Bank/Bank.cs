@@ -7,8 +7,8 @@ public class Bank
     //Ввод информации
     void Info()
     {
-        Console.WriteLine($"Введите ноиер счета и ФИО: \n" +
-                          $">");
+        Console.Write($"Введите номер счета и ФИО:\n" +
+                      $">");
         string[] s = Console.ReadLine().Split(',',' ',';');
         _accNumber = Int32.Parse(s[0]);
         _accName = s[1];
@@ -16,12 +16,16 @@ public class Bank
     //вывод информации о счете
     void Out()
     {
-        Console.WriteLine($"Номер счета: {_accNumber}, Имя: {_accName}, Сумма на счете: {_accSum}");
+        Console.WriteLine($"----------------------------\n" +
+                          $"Номер счета: {_accNumber}\n" +
+                          $"Имя: {_accName}\n" +
+                          $"Сумма на счете: {_accSum}\n" +
+                          $"----------------------------\n");
     }
     //пополнение счета
     void Dob()
     {
-        Console.Write("Ввидите сумму пополнения: ");
+        Console.Write("Введите сумму пополнения: ");
         float sum = Convert.ToInt32(Console.ReadLine());
         if (sum > 0)
         {
@@ -37,7 +41,7 @@ public class Bank
     //снять со счета
     void Umen()
     {
-        Console.Write("Ввидите суммы вывода: ");
+        Console.Write("Введите суммы вывода: ");
         float sum = Convert.ToInt32(Console.ReadLine());
         if (sum > 0)
         {
@@ -61,14 +65,14 @@ public class Bank
     //снятие всей суммы со счета
     void Obmul()
     {
-        Console.Write("Вы точно хотите снять всю сумму: ДА/НЕТ" +
-                          ">");
+        Console.Write("Вы точно хотите снять всю сумму: +/-\n" +
+                      ">");
         string ans = Console.ReadLine();
-        if (ans == "ДА")
+        if (ans == "+")
         {
             _accSum = 0;
         }
-        else if(ans == "НЕТ")
+        else if(ans == "-")
         {
             Console.WriteLine("Спасибо, что вы с нами");
         }
@@ -80,7 +84,7 @@ public class Bank
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //поиск счета по номеру
-    Bank Search(int nom, List<Bank> banks) 
+    Bank Search(int nom, Bank[] banks) 
     {
         foreach (Bank bank in banks)
         {
@@ -92,21 +96,21 @@ public class Bank
         return null;
     }
     //перевод между счетами
-    void Transfer(List<Bank> Banks)
+    void Transfer(Bank[] banks)
     {
-        Console.Write("Ввидите номер счета получателя: ");
+        Console.Write("Введите номер счета получателя: ");
         int nom = Convert.ToInt32(Console.ReadLine());
-        Bank srhBank = Search(nom, Banks);
+        Bank srhBank = Search(nom, banks);
         if (srhBank == null)
         {
             Console.WriteLine("Получатель не найден, попробуйте еще раз");
-            Transfer(Banks);
+            Transfer(banks);
         }
-        Console.Write("Ввидите сумму перевода: ");
+        Console.Write("Введите сумму перевода: ");
         float sum = Convert.ToInt32(Console.ReadLine());
         if (sum > 0)
         {
-            if (sum > _accNumber)
+            if (sum > _accSum)
             {
                 _accSum -= sum;
                 srhBank._accSum += sum;
@@ -114,23 +118,24 @@ public class Bank
             else
             {
                 Console.WriteLine("Недостаточно суммы на счете, попробуйте еще раз");
-                Transfer(Banks);
+                Transfer(banks);
             }
         }
         else
         {
             Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
-            Transfer(Banks);
+            Transfer(banks);
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //Интерфейс пользователя
-    public void Menu(List<Bank> Banks)
+    public void Menu(Bank[] banks)
     {
         while (true)
         {
-            Console.WriteLine
-            ("Выберете необходимое действие:\n" +
+            Console.Write
+            ("------------------------------\n" +
+             "Выберете необходимое действие:\n" +
              "0. Ввести данные\n" +
              "1. Показать данные счета\n" +
              "2. Пополнить счет\n" +
@@ -146,7 +151,7 @@ public class Bank
                 case 2: Dob(); break;
                 case 3: Umen(); break;
                 case 4: Obmul(); break;
-                case 5: Transfer(Banks); break;
+                case 5: Transfer(banks); break;
                 case 6: return;
             }
         }
