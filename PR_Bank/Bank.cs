@@ -2,13 +2,26 @@
 public class Bank
 {
     private int _accNumber; //номер счета
-    private string _accName;//ФИО
     private float _accSum;  //Сумма на счете
+    private string _accName;//ФИО
+    public int AccNumber
+    {
+        get { return _accNumber; }
+    }
+    public string AccName
+    {
+        get { return _accName; }
+    }
     //Ввод информации
+    public Bank()
+    {
+        Info();
+    }
     void Info()
     {
-        Console.Write($"Введите номер счета и ФИО:\n" +
-                      $">");
+        Console.Write
+        ($"Введите номер счета и ФИО:\n" +
+         $">");
         string[] s = Console.ReadLine().Split(',',' ',';');
         _accNumber = Int32.Parse(s[0]);
         _accName = s[1];
@@ -16,120 +29,139 @@ public class Bank
     //вывод информации о счете
     void Out()
     {
-        Console.WriteLine($"----------------------------\n" +
-                          $"Номер счета: {_accNumber}\n" +
-                          $"Имя: {_accName}\n" +
-                          $"Сумма на счете: {_accSum}\n" +
-                          $"----------------------------\n");
+        Console.WriteLine
+        ($"----------------------------\n" +
+         $"Номер счета: {_accNumber}\n" +
+         $"Имя: {_accName}\n" +
+         $"Сумма на счете: {_accSum}\n" +
+         $"----------------------------\n");
     }
     //пополнение счета
     void Dob()
     {
-        Console.Write("Введите сумму пополнения: ");
-        float sum = Convert.ToInt32(Console.ReadLine());
-        if (sum > 0)
+        bool exit = true;
+        while (exit)
         {
-            _accSum += sum;
-        }
-        else
-        {
-            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
-            Dob();
+            Console.Write("Введите сумму пополнения: ");
+            float sum = Convert.ToInt32(Console.ReadLine());
+            if (sum >= 0)
+            {
+                _accSum += sum;
+                exit = false;
+            }
+            else
+            {
+                Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
+            }
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //снять со счета
     void Umen()
     {
-        Console.Write("Введите суммы вывода: ");
-        float sum = Convert.ToInt32(Console.ReadLine());
-        if (sum > 0)
+        bool exit = true;
+        while (exit)
         {
-            if (sum <= _accSum)
+            Console.Write("Введите суммы вывода: ");
+            float sum = Convert.ToInt32(Console.ReadLine());
+            if (sum >= 0)
             {
-                _accSum -= sum;
+                if (sum <= _accSum)
+                {
+                    _accSum -= sum;
+                    exit = false;
+                }
+                else
+                {
+                    Console.WriteLine("Недостаточно суммы на счете, попробуйте еще раз");
+                }
             }
             else
             {
-                Console.WriteLine("Недостаточно суммы на счете, попробуйте еще раз");
-                Umen();
+                Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
             }
-        }
-        else
-        {
-            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
-            Umen();
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //снятие всей суммы со счета
     void Obmul()
     {
-        Console.Write("Вы точно хотите снять всю сумму: +/-\n" +
-                      ">");
-        string ans = Console.ReadLine();
-        if (ans == "+")
+        bool exit = true;
+        while (exit)
         {
-            _accSum = 0;
-        }
-        else if(ans == "-")
-        {
-            Console.WriteLine("Спасибо, что вы с нами");
-        }
-        else
-        {
-            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
-            Obmul();
+            Console.Write("Вы точно хотите снять всю сумму: +/-\n" +
+                          ">");
+            string ans = Console.ReadLine();
+            if (ans == "+")
+            {
+                _accSum = 0;
+                exit = false;
+            }
+            else if(ans == "-")
+            {
+                Console.WriteLine("Спасибо, что вы с нами");
+                exit = false;
+            }
+            else
+            {
+                Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
+            }
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //поиск счета по номеру
-    Bank Search(int nom, Bank[] banks) 
+    Bank Search(List<Bank> banks) 
     {
-        foreach (Bank bank in banks)
+        while (true)
         {
-            if (nom == bank._accNumber)
+            Console.Write("Введите номер счета получателя: ");
+            int nom = Convert.ToInt32(Console.ReadLine());
+            foreach (Bank bank in banks)
             {
-                return bank;
+                if (nom == bank._accNumber)
+                {
+                    return bank;
+                }
             }
+            return null;
         }
-        return null;
     }
     //перевод между счетами
-    void Transfer(Bank[] banks)
+    void Transfer(List<Bank> banks)
     {
-        Console.Write("Введите номер счета получателя: ");
-        int nom = Convert.ToInt32(Console.ReadLine());
-        Bank srhBank = Search(nom, banks);
-        if (srhBank == null)
+        bool exit = true;
+        while (exit)
         {
-            Console.WriteLine("Получатель не найден, попробуйте еще раз");
-            Transfer(banks);
-        }
-        Console.Write("Введите сумму перевода: ");
-        float sum = Convert.ToInt32(Console.ReadLine());
-        if (sum > 0)
-        {
-            if (sum > _accSum)
+            Bank srhBank = Search(banks);
+            if (srhBank == null)
             {
-                _accSum -= sum;
-                srhBank._accSum += sum;
+                Console.WriteLine("Получатель не найден, попробуйте еще раз");
+                srhBank = Search(banks);
+            }
+            Console.Write("Введите сумму перевода: ");
+            float sum = Convert.ToInt32(Console.ReadLine());
+            if (sum >= 0)
+            {
+                if (sum <= _accSum)
+                {
+                    _accSum -= sum;
+                    srhBank._accSum += sum;
+                    exit = false;
+                }
+                else
+                {
+                    Console.WriteLine("Недостаточно суммы на счете, попробуйте еще раз");
+                }
             }
             else
             {
-                Console.WriteLine("Недостаточно суммы на счете, попробуйте еще раз");
-                Transfer(banks);
+                Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
             }
-        }
-        else
-        {
-            Console.WriteLine("Неверный формат ввода, попробуйте еще раз");
-            Transfer(banks);
         }
         Console.WriteLine($"Сумма на счете: {_accSum}");
     }
     //Интерфейс пользователя
-    public void Menu(Bank[] banks)
+    public void Menu(List<Bank> banks)
     {
         while (true)
         {
