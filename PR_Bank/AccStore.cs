@@ -3,7 +3,6 @@
 public class AccStore
 {
     private List<Bank> _acc = new List<Bank>();
-
     public List<Bank> Acc
     {
         get { return _acc; }
@@ -31,7 +30,7 @@ public class AccStore
             return _acc[index];
         return null;
     }
-
+    //Вывод информации
     void Info()
     {
         for(int i = 0; i < _acc.Count; i++)
@@ -39,7 +38,7 @@ public class AccStore
             Console.WriteLine($"Индекс счета: {i}, Номер: {_acc[i].AccNumber}, ФИО: {_acc[i].AccName}");
         }
     }
-    //Интефейс
+    //Интефейс управления счетами
     public Bank AccMenu()
     {
         while (true)
