@@ -1,20 +1,20 @@
 ﻿namespace PR_Bank;
 public class Bank
 {
-    private int _accNumber;
-    private string _accName;
-    private float _accSum;
+    private int _accNumber; //номер счета
+    private string _accName;//ФИО
+    private float _accSum;  //Сумма на счете
     //Ввод информации
     void Info()
     {
         Console.WriteLine($"Введите ноиер счета и ФИО: \n" +
                           $">");
-        string[] s = Console.ReadLine().Split(',', ' ', ';');
+        string[] s = Console.ReadLine().Split(',',' ',';');
         _accNumber = Int32.Parse(s[0]);
         _accName = s[1];
     }
     //вывод информации о счете
-    public void Out()
+    void Out()
     {
         Console.WriteLine($"Номер счета: {_accNumber}, Имя: {_accName}, Сумма на счете: {_accSum}");
     }
