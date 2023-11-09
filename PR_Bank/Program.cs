@@ -1,11 +1,9 @@
 ﻿using PR_Bank;
-
 class Program
 {
     public static void Main(string[] args)
     {
         AccStore accStore = new AccStore();
-
         while (true)
         {
             Console.WriteLine("Чтобы продолжить, нажмите Enter"); 
@@ -20,6 +18,5 @@ class Program
                 return;
             }
         }
-        
     }
 }
