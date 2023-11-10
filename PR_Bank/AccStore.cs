@@ -10,7 +10,7 @@ public class AccStore
     //Добавление счета
     void AddAcc()
     {
-        _acc.Add(new Bank());
+        _acc.Add(new Bank(_acc));
         Console.WriteLine("Cчёт добавлен");
     }
     //Удаление счета
