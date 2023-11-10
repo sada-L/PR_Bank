@@ -1,4 +1,7 @@
-﻿namespace PR_Bank;
+﻿using System.Diagnostics.Tracing;
+using System.Reflection.Emit;
+
+namespace PR_Bank;
 public class Bank
 {
     private int _accNumber; //номер счета
@@ -13,18 +16,30 @@ public class Bank
         get { return _accName; }
     }
     //Ввод информации
-    public Bank()
+    public Bank(List<Bank> banks)
     {
-        Info();
+        Info(banks);
     }
-    void Info()
+    void Info(List<Bank> banks)
     {
-        Console.Write
-        ($"Введите номер счета и ФИО:\n" +
-         $">");
-        string[] s = Console.ReadLine().Split(',',' ',';');
-        _accNumber = Int32.Parse(s[0]);
-        _accName = s[1];
+        while (true)
+        {
+            Label:
+            Console.Write
+            ("Введите номер счета и ФИО:\n" + ">");
+            string[] s = Console.ReadLine().Split(',', ' ', ';');
+            foreach (Bank bank in banks)
+            {
+                if (Int32.Parse(s[0]) == bank._accNumber)
+                {
+                    Console.WriteLine("Такой счет уже существует, попробуйте еще раз");
+                    goto Label;
+                }
+            }
+            _accNumber = Int32.Parse(s[0]);
+            _accName = s[1];
+            return;
+        }
     }
     //вывод информации о счете
     void Out()
@@ -178,7 +193,7 @@ public class Bank
              ">");
             switch (Convert.ToInt32(Console.ReadLine()))
             {
-                case 0: Info(); break;
+                case 0: Info(banks); break;
                 case 1: Out(); break;
                 case 2: Dob(); break;
                 case 3: Umen(); break;
